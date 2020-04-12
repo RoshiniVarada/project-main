@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, ActivatedRoute } from "@angular/router";
-import { FirebaseService } from '../../shared/services/firebase.service';
+import { FirebaseService } from '../../serviceshared/services/firebase.service';
 
 @Injectable()
 export class EditSectionResolver implements Resolve<any> {

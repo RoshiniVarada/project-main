@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from '../../shared/services/firebase.service';
+import { FirebaseService } from '../../serviceshared/services/firebase.service';
 import { MatDialogRef } from '@angular/material';
 
 @Component({

@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule,FormsModule } from "@angular/forms";
 import { DragDropModule } from "@angular/cdk/drag-drop";
 // App routing modules
-import { AppRoutingModule } from './shared/routing/app-routing.module';
+import { AppRoutingModule } from './serviceshared/routing/app-routing.module';
 import { QuizComponent } from './components/quiz/quiz.component';
 // App components
 import { AppComponent } from './app.component';
@@ -25,7 +25,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 // Auth service
-import { AuthService } from "./shared/services/auth.service";
+import { AuthService } from "./serviceshared/services/auth.service";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //Material
