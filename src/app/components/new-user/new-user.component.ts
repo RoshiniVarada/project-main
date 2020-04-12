@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { MatDialog } from '@angular/material';
 import { AvatarDialogComponent } from "../avatar-dialog/avatar-dialog.component";
 import { Router } from '@angular/router';
-import { FirebaseService } from '../../serviceshared/services/firebase.service';
-import { AuthService } from 'src/app/serviceshared/services/auth.service';
+import { FirebaseService } from '../../shared/services/firebase.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-new-user',

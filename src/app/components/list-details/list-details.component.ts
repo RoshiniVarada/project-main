@@ -1,7 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { AuthService } from 'src/app/serviceshared/services/auth.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { moveItemInArray, CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
-import { FirebaseService } from 'src/app/serviceshared/services/firebase.service';
+import { FirebaseService } from 'src/app/shared/services/firebase.service';
 import { Router } from '@angular/router';
 
 @Component({

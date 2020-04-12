@@ -1,8 +1,8 @@
 
 import { Component, OnInit, NgZone } from '@angular/core';
-import { FirebaseService } from '../../serviceshared/services/firebase.service';
+import { FirebaseService } from '../../shared/services/firebase.service';
 import { Router, Params } from '@angular/router';
-import { AuthService } from 'src/app/serviceshared/services/auth.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { QuizComponent } from'../quiz/quiz.component';
 @Component({
   selector: 'app-student-dashboard',

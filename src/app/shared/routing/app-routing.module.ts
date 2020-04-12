@@ -9,8 +9,8 @@ import { ForgotPasswordComponent } from '../../components/forgot-password/forgot
 import { VerifyEmailComponent } from '../../components/verify-email/verify-email.component';
 
 // Import canActivate guard services
-import { AuthGuard } from "../../serviceshared/guard/auth.guard";
-import { SecureInnerPagesGuard } from "../../serviceshared/guard/secure-inner-pages.guard";
+import { AuthGuard } from "../../shared/guard/auth.guard";
+import { SecureInnerPagesGuard } from "../../shared/guard/secure-inner-pages.guard";
 import { HomeComponent } from 'src/app/components/home/home.component';
 import { NewUserComponent } from 'src/app/components/new-user/new-user.component';
 import { EditUserComponent } from 'src/app/components/edit-user/edit-user.component';
