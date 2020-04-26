@@ -12,17 +12,9 @@ import { VerifyEmailComponent } from '../../components/verify-email/verify-email
 import { AuthGuard } from "../../shared/guard/auth.guard";
 import { SecureInnerPagesGuard } from "../../shared/guard/secure-inner-pages.guard";
 import { HomeComponent } from 'src/app/components/home/home.component';
-import { NewUserComponent } from 'src/app/components/new-user/new-user.component';
-import { EditUserComponent } from 'src/app/components/edit-user/edit-user.component';
-import { NewSectionComponent } from 'src/app/components/new-section/new-section.component';
-import { EditSectionComponent } from 'src/app/components/edit-section/edit-section.component';
-import { EditUserResolver } from 'src/app/components/edit-user/edit-user.resolver';
-import { EditSectionResolver } from 'src/app/components/edit-section/edit-section.resolver';
-import { ListDetailsComponent } from 'src/app/components/list-details/list-details.component';
 import { ErrorComponent } from 'src/app/components/error/error.component';
 import { NonuserComponent } from 'src/app/components/nonuser/nonuser.component';
-import { DisplaySectionComponent } from 'src/app/components/display-section/display-section.component';
-import { StudentDashboardComponent } from 'src/app/components/student-dashboard/student-dashboard.component';
+
 
 // Include route guard in routes array
 const routes: Routes = [
@@ -30,18 +22,14 @@ const routes: Routes = [
   { path: 'sign-in', component: SignInComponent, canActivate: [SecureInnerPagesGuard]},
   { path: 'register-user', component: SignUpComponent, canActivate: [SecureInnerPagesGuard]},
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  {path:'stu-dashboard',component:StudentDashboardComponent,canActivate: [AuthGuard]},
   { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [SecureInnerPagesGuard] },
+    { path: 'layout', loadChildren: () => import('../../layout/layout.module').then(m => m.LayoutModule), canActivate: [AuthGuard] },
   { path: 'verify-email-address', component: VerifyEmailComponent, canActivate: [SecureInnerPagesGuard] },
   { path: 'home', component: HomeComponent },
-  { path:'display-section',component: DisplaySectionComponent},
   { path: 'error', component: ErrorComponent },
-  { path: 'nonuser', component: NonuserComponent },
-  { path: 'new-user', component: NewUserComponent },
-  { path: 'new-section', component: NewSectionComponent },
-  {path: 'list-details',component: ListDetailsComponent},
-  { path: 'details/:id', component: EditUserComponent, resolve:{data : EditUserResolver} },
-  { path: 'secdetails/:id', component: EditSectionComponent, resolve:{data : EditSectionResolver} }
+  { path: 'nonuser', component: NonuserComponent }
+ // { path: 'details/:id', component: EditUserComponent, resolve:{data : EditUserResolver} },
+ // { path: 'secdetails/:id', component: EditSectionComponent, resolve:{data : EditSectionResolver} }
 ];
 
 @NgModule({

@@ -53,7 +53,7 @@ export class AuthService {
                 console.log(this.items[i].payload.doc.data().role,this.items[i].payload.doc.data().email,i)
                  if(this.items[i].payload.doc.data().role=="admin"){
                    this.login=true;
-                  this.router.navigate(['home']);
+                  this.router.navigate(['layout']);
                  }else{
                   this.router.navigate(['dashboard']);
                  }
@@ -122,7 +122,7 @@ export class AuthService {
     return this.afAuth.auth.signInWithPopup(provider)
     .then((result) => {
        this.ngZone.run(() => {
-         this.router.navigate(['home']);
+        // this.router.navigate(['layout']);
 
       this.firebaseService.getUsers()
         .subscribe(resp => {
@@ -131,9 +131,10 @@ export class AuthService {
             if(this.login==false){
               if(this.items[i].payload.doc.data().email==result.user.email){
                 console.log(this.items[i].payload.doc.data().role,this.items[i].payload.doc.data().email,i)
+                localStorage.setItem("id",this.items[i].payload.doc.data().id);
                  if(this.items[i].payload.doc.data().role=="admin"){
                    this.login=true;
-                  this.router.navigate(['home']);
+                  this.router.navigate(['layout']);
                  }else{
                   this.router.navigate(['dashboard']);
                  }
@@ -179,6 +180,7 @@ export class AuthService {
   SignOut() {
     return this.afAuth.auth.signOut().then(() => {
       localStorage.removeItem('user');
+      localStorage.removeItem('UserDetails');
       this.router.navigate(['sign-in']);
     })
   }

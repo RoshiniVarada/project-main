@@ -1,11 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+
 import { NgModule } from '@angular/core';
+import { LanguageTranslationModule } from './shared/modules/language-translation/language-translation.module'
 // Reactive Form
 import { ReactiveFormsModule,FormsModule } from "@angular/forms";
 import { DragDropModule } from "@angular/cdk/drag-drop";
 // App routing modules
 import { AppRoutingModule } from './shared/routing/app-routing.module';
-import { QuizComponent } from './components/quiz/quiz.component';
 // App components
 import { AppComponent } from './app.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
@@ -14,10 +16,6 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { HomeComponent } from './components/home/home.component';
-import { NewUserComponent } from './components/new-user/new-user.component';
-import { EditUserComponent } from './components/edit-user/edit-user.component';
-import { NewSectionComponent } from './components/new-section/new-section.component';
-import { EditSectionComponent } from './components/edit-section/edit-section.component';
 // Firebase services + enviorment module
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
@@ -36,15 +34,10 @@ import {
   MatChipsModule,
    MatInputModule, MatSliderModule, MatDialogModule
 } from "@angular/material";
-import { EditUserResolver } from './components/edit-user/edit-user.resolver';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+//import { EditUserResolver } from './components/edit-user/edit-user.resolver';
 
-import { ListDetailsComponent } from './components/list-details/list-details.component';
 import { ErrorComponent } from './components/error/error.component';
 import { NonuserComponent } from './components/nonuser/nonuser.component';
-import { DisplaySectionComponent } from './components/display-section/display-section.component';
-import { EditSectionResolver } from './components/edit-section/edit-section.resolver';
-import { StudentDashboardComponent } from './components/student-dashboard/student-dashboard.component';
 
 const MAT_MODULES  = [
   MatButtonModule,
@@ -60,42 +53,34 @@ const MAT_MODULES  = [
     AppComponent,
     SignInComponent,
     SignUpComponent,
-      QuizComponent,
 
     DashboardComponent,
     ForgotPasswordComponent,
     VerifyEmailComponent,
     HomeComponent,
-    NewUserComponent,
-    EditUserComponent,
-    NewSectionComponent,
-    EditSectionComponent,
-    ListDetailsComponent,
     ErrorComponent,
-    NonuserComponent,
-    DisplaySectionComponent,
-    StudentDashboardComponent
+    NonuserComponent
 
   ],
   imports: [
-    BrowserModule,
+        CommonModule,
+        BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+        LanguageTranslationModule,
     FormsModule,
     DragDropModule,
         HttpClientModule,
   MAT_MODULES
   ],
   exports: [MAT_MODULES],
-  providers: [AuthService,EditUserResolver,EditSectionResolver],
-  bootstrap: [AppComponent],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
-  ]
+  providers: [AuthService],
+  bootstrap: [AppComponent]
+
 })
 
 export class AppModule { }
