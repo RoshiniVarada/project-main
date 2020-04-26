@@ -41,33 +41,7 @@ export class AuthService {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
-        //  this.router.navigate(['home']);
-
-
-        this.firebaseService.getUsers()
-        .subscribe(resp => {
-          this.items = resp;
-          for(var i=0;i< resp.length;i++){
-            if(this.login==false){
-              if(this.items[i].payload.doc.data().email==result.user.email){
-                console.log(this.items[i].payload.doc.data().role,this.items[i].payload.doc.data().email,i)
-                 if(this.items[i].payload.doc.data().role=="admin"){
-                   this.login=true;
-                  this.router.navigate(['layout']);
-                 }else{
-                  this.router.navigate(['dashboard']);
-                 }
-               }else{
-                this.login=false;
-                 this.SignOut()
-               }
-            }
-           
-          }
-        })
-
-
-
+         this.router.navigate(['layout']);
         });
         this.SetUserData(result.user);
       }).catch((error) => {
@@ -122,33 +96,7 @@ export class AuthService {
     return this.afAuth.auth.signInWithPopup(provider)
     .then((result) => {
        this.ngZone.run(() => {
-        // this.router.navigate(['layout']);
-
-      this.firebaseService.getUsers()
-        .subscribe(resp => {
-          this.items = resp;
-          for(var i=0;i< resp.length;i++){
-            if(this.login==false){
-              if(this.items[i].payload.doc.data().email==result.user.email){
-                console.log(this.items[i].payload.doc.data().role,this.items[i].payload.doc.data().email,i)
-                localStorage.setItem("id",this.items[i].payload.doc.data().id);
-                 if(this.items[i].payload.doc.data().role=="admin"){
-                   this.login=true;
-                  this.router.navigate(['layout']);
-                 }else{
-                  this.router.navigate(['dashboard']);
-                 }
-               }else{
-                this.login=false;
-                 this.SignOut()
-               }
-            }
-           
-          }
-        })  
-
-
-
+         this.router.navigate(['layout']);
 
 
 
