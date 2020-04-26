@@ -133,18 +133,20 @@ export class QuizComponent implements OnInit {
 
   marksCalculation(){
     this.marks=0;
-   for(var i=0;i<this.quiz.questions.length;i++){
-      if(this.isCorrect(this.quiz.questions[i])=="correct"){
-        this.marks++;
-        
-        
-      }
-      if(this.quiz.questions.length==i+1){
-        this.finalmarks=this.marks;
-        this.percent=(this.finalmarks/this.totalmarks) *100;
-
-      }
-   }
+    if(this.quiz.questions && this.quiz.questions.length>0){
+      for(var i=0;i<this.quiz.questions.length;i++){
+        if(this.isCorrect(this.quiz.questions[i])=="correct"){
+          this.marks++;
+          
+          
+        }
+        if(this.quiz.questions.length==i+1){
+          this.finalmarks=this.marks;
+          this.percent=(this.finalmarks/this.totalmarks) *100;
+  
+        }
+     }
+    }
    return  this.percent;
   }
 }
