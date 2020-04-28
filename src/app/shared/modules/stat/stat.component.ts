@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-stat',
@@ -10,7 +11,12 @@ export class StatComponent implements OnInit {
 
     @Output() event: EventEmitter<any> = new EventEmitter();
 
-    constructor() {}
+    constructor(
+        private router: Router
+    ) {}
 
     ngOnInit() {}
+    viewdetails(subject){
+        this.router.navigate(['faculty-layout/layout/new-section']);
+    }
 }

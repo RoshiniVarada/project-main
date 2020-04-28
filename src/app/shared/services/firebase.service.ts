@@ -38,6 +38,15 @@ export class FirebaseService {
   deleteUser(userKey){
     return this.db.collection('group').doc(userKey).delete();
   }
+  
+  deleteAlert(alert){
+    return this.db.collection('alerts').doc(alert.payload.doc.id).delete();
+  }
+ editAlert(alert){
+   console.log("alert.payload.doc.data()",alert.description);
+   var alert1={description:alert.description};
+ return this.db.collection('alerts').doc(alert.payload.doc.id).set(alert1);
+  }
   deleteSection(Key){
     return this.db.collection('section').doc(Key).delete();
   }
@@ -66,8 +75,8 @@ export class FirebaseService {
   createUser(value, avatar){
     this.profileuser=JSON.parse(localStorage.getItem("user"));
     return this.db.collection('group').add({
-      name: value.name,
-      nameToSearch: value.name.toLowerCase(),
+      Username: value.Username,
+      nameToSearch: value.Username.toLowerCase(),
       email: value.email,
       FirstName:value.FirstName,
       LastName:value.LastName,
@@ -121,5 +130,10 @@ export class FirebaseService {
   
   getAlerts(){
     return this.db.collection('alerts').snapshotChanges();
+  }
+  createAlert(value){
+    return this.db.collection('alerts').add({
+      description: value
+    })
   }
 }

@@ -9,7 +9,7 @@ import { FirebaseService } from './shared/services/firebase.service';
 })
 
 export class AppComponent implements OnInit {
-  title = 'project-main';
+  title = 'Project-app';
   signin:boolean;
   items: any;
   jsonData: any;

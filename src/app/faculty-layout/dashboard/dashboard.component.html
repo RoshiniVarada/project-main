@@ -1,0 +1,68 @@
+<div [@routerTransition]>
+    <h2 class="text-muted">List of Subjects </h2>    <!--<small>Statistics Overview</small>-->
+    <div class="row card-group">
+        <div class="col-xl-3 col-lg-6" *ngFor="let subject of subjects">   
+                <app-stat class="card" [subject]="subject"></app-stat>     
+            </div> 
+       </div>
+    <hr /> 
+
+<div class="alert alert-info alert-dismissible fade show" *ngFor="let alert of alerts">
+    <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close" (close)="closeAlert(alert)" >
+      <i class="fa fa-times"></i>
+    </button>
+    <button *ngIf="alert.edit==='false'" type="button" class="recycle_edit" aria-hidden="true" class="close class_edit" (click)="editAlert(alert)" >
+      <i class="fa fa-edit"></i>
+    </button>
+    <button *ngIf="alert.edit==='true'" type="button" class="recycle_edit" aria-hidden="true" class="close class_edit" (click)="saveAlert(alert)" >
+      <i class="fa fa-save"></i>
+    </button>
+    <button type="button" class="recycle_remove" aria-hidden="true" class="close class_remove" (click)="deleteAlert(alert)"  >
+        <i class="fa fa-trash"></i>
+      </button>
+    <span  *ngIf="alert.edit==='false'">{{ alert.payload.doc.data().description}}</span>
+    <span *ngIf="alert.edit==='true'"><input type="text" class="add_alert" value="{{alert.payload.doc.data().description}}"  [(ngModel)]="textAlert"></span>
+  </div>
+
+  <div class="alert alert-info alert-dismissible fade show" *ngIf="removeCreate=='true'">
+    <button type="button" aria-hidden="true"  aria-hidden="true" class="close" (click)="createAlert()">
+      <i class="fa fa-save"></i>
+    </button>
+    <button type="button" class="recycle_remove" aria-hidden="true" class="close class_remove" (click)="removeAlert()" >
+      <i class="fa fa-trash"></i>
+    </button>
+    <input   type="text" class="add_alert" [(ngModel)]="newAlert">
+  </div>
+
+    <hr />
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card card-default notifstyle">
+                <div class="card-header">
+                    <i class="fa fa-clock-o fa-fw"></i> Active Learning
+                </div>
+                <!-- /.card-header -->
+                <app-timeline></app-timeline>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col-lg-8 -->
+        <div class="col-lg-4">
+            <div class="card card-default mb-3 notifstyle">
+                <div class="card-header">
+                    <i class="fa fa-bell fa-fw"></i> Notifications
+                </div>
+                <!-- /.card-header -->
+                <app-notification></app-notification>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+            <div class="notifstyle">
+            <app-chat></app-chat>
+            </div>
+            <!-- /.card .chat-card -->
+        </div>
+        <!-- /.col-lg-4 -->
+    </div>
+</div>

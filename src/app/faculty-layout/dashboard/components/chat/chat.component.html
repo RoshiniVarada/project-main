@@ -1,0 +1,48 @@
+<div class="chat-panel card card-default">
+    <div class="card-header">
+        <i class="fa fa-comments fa-fw"></i>
+        Chat
+    </div>
+
+    <div class="card-body">
+        <ul class="chat">
+            <li class="clearfix" *ngFor="let message of messages">
+                <span class="chat-img pull-left">
+                    <img class="image_chat" *ngIf="message.action === undefined"  [src]="message.from.avatar" alt="User Avatar">
+                </span>
+                <div class="chat-body clearfix">
+                    <div class="header">
+                        <strong class="primary-font">{{message.from.name}}</strong>
+                        <small class="pull-right text-muted">
+                            <i class="fa fa-clock-o fa-fw"></i> {{message.timeFormat}}
+                        </small>
+                    </div>
+                    <p>
+                        {{message.content}}
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer">
+        <div class="input-group">
+
+            <input  class="form-control input-sm"
+            maxlength="140"
+            placeholder="{{'Type your message'}}"
+            [(ngModel)]="messageContent"
+            (keyup.enter)="sendMessage(messageContent)">
+
+            <span  class="input-group-btn">
+                <div  id="btn-chat" class="btn-chat" (click)="sendMessage(messageContent)"> 
+                <img src="https://i7.pngguru.com/preview/891/367/719/computer-icons-download-symbol-send-email-button.jpg" class="btn-chat" >
+            </div>
+            </span>
+
+
+
+        </div>
+    </div>
+    <!-- /.card-footer -->
+</div>

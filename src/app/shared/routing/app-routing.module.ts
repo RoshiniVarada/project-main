@@ -24,12 +24,11 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [SecureInnerPagesGuard] },
     { path: 'layout', loadChildren: () => import('../../layout/layout.module').then(m => m.LayoutModule), canActivate: [AuthGuard] },
+    { path: 'faculty-layout', loadChildren: () => import('../../faculty-layout/faculty-layout.module').then(m => m.FacultyLayoutModule), canActivate: [AuthGuard] },
   { path: 'verify-email-address', component: VerifyEmailComponent, canActivate: [SecureInnerPagesGuard] },
   { path: 'home', component: HomeComponent },
   { path: 'error', component: ErrorComponent },
   { path: 'nonuser', component: NonuserComponent }
- // { path: 'details/:id', component: EditUserComponent, resolve:{data : EditUserResolver} },
- // { path: 'secdetails/:id', component: EditSectionComponent, resolve:{data : EditSectionResolver} }
 ];
 
 @NgModule({

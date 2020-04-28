@@ -1,0 +1,49 @@
+.notifstyle{
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+}
+.row_chck{
+    width:100%;
+   
+}
+.col_chck{
+    width:25%
+}
+
+.alert {
+    border: 0;
+    border-radius: 3px;
+    color: #FFFFFF;
+    padding-top: .9rem;
+    padding-bottom: .9rem;
+    position: relative;
+}
+
+.alert.alert-info {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+
+.add_alert{
+    border: none;
+    border-radius: 35vw;
+    width: 52vw;
+}
+
+.class_remove{
+    right: -6.5vw;
+}
+.class_edit{
+    right: 7vw;
+    top: 0.2vw;
+}
+@media screen and (min-width: 460px) {
+    .class_remove{
+        right: 2.5vw;
+    }
+    .class_edit{
+        right: 5vw;
+    padding: 0.75rem 1.25rem;
+    }
+
+}

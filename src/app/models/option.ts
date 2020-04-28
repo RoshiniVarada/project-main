@@ -2,7 +2,7 @@ export class Option {
     id: number;
     questionId: number;
     name: string;
-    isAnswer: boolean;
+    isAnswer: string;
     selected: boolean;
 
     constructor(data: any) {
