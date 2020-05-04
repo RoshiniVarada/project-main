@@ -57,7 +57,6 @@ export class DashboardComponent implements OnInit {
         this.firebaseService.getSubjects()
         .subscribe(result => {
           this.subjects = result;
-          console.log( this.subjects)
         })
 
 

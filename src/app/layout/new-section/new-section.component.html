@@ -1,15 +1,15 @@
-<div class="wrapper overflow_class">
+<div class="wrapper overflow_class"  *ngIf="showcomp">
     <div class="main-panel">
       <div class="content">
-        <h2 class="alignment"><strong>PYTHON </strong></h2>
+        <h2 class="alignment"><strong>{{valuesnew.name}}</strong></h2>
         <div class="row">
           <div class="col-md-4">
             <div class="card">
 
-              <div class="card-header">
+              <div class="card-header" (click)="showfn('modules')">
                 <h5 class="card-title">Modules</h5>
               </div>
-              <div class="card-header">
+              <div class="card-header" (click)="showfn('assignments')">
                 <h5 class="card-title">Assignments</h5>
               </div>
               <div class="card-header">
@@ -38,7 +38,7 @@
           <div class="col-md-8">
 
             <!----modules-->
-             <div class="card card-user">
+             <div class="card card-user" *ngIf="modules">
 
                 <div class="card-header">
                      <h5 class="card-title">Modules</h5>
@@ -46,50 +46,14 @@
 
                 <div class="card-body">
 
-                    <div class="blog-card">
+                    <div class="blog-card" *ngFor="let sub of modulesSub">
                         <div class="description">
-                            <h4>Overview</h4>
+                            <h4>{{sub.payload.doc.data().Title}}</h4>
                             <p class="read-more">
-                                <a href="https://www.tutorialspoint.com/python/python_overview.htm">Read More</a>
+                                <a href="{{sub.payload.doc.data().Url}}">Read More</a>
                             </p>
                         </div>
                     </div>
-
-                    <div class="blog-card alt">
-                        <div class="description">
-                            <h4>Basic Operators</h4>
-                            <p class="read-more">
-                                <a href="https://www.tutorialspoint.com/python/python_basic_operators.htm">Read More</a>
-                            </p>
-                        </div>
-                    </div>
-
-                  <div class="blog-card alt">
-                    <div class="description">
-                      <h4>CGI Programming</h4>
-                      <p class="read-more">
-                        <a href="https://www.tutorialspoint.com/python/python_cgi_programming.htm">Read More</a>
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="blog-card alt">
-                    <div class="description">
-                      <h4>Multithreading</h4>
-                      <p class="read-more">
-                        <a href="https://www.tutorialspoint.com/python/python_multithreading.htm">Read More</a>
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="blog-card alt">
-                    <div class="description">
-                      <h4>Networking</h4>
-                      <p class="read-more">
-                        <a href="https://www.tutorialspoint.com/python/python_networking.htm">Read More</a>
-                      </p>
-                    </div>
-                  </div>
 
                 </div>
 
@@ -98,7 +62,7 @@
 
 
              <!----assignments-->
-             <div class="card card-user">
+             <div class="card card-user" *ngIf="assignments">
 
                 <div class="card-header">
                      <h5 class="card-title">Assignments</h5>
@@ -106,22 +70,12 @@
 
                 <div class="card-body">
 
-                    <div class="blog-card">
+                    <div class="blog-card" *ngFor="let assgn of assgnSub">
                         <div class="description">
-                            <h4>LEARNING TO CODE</h4>
-                            <h6>Opening a Door to the Future</h6>
+                            <h4>Assignment{{assgn.payload.doc.data().No}}</h4>
+                            <h6>Max Marks {{assgn.payload.doc.data().Max_marks}}</h6>
                             <p class="read-more">
-                                <a href="#">Read More</a>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="blog-card alt">
-                        <div class="description">
-                            <h4>MASTERING THE LANGUAGE</h4>
-                            <h6>Java is not the same as JavaScript</h6>
-                            <p class="read-more">
-                                <a href="#">Read More</a>
+                                <a (click)="taketest(assgn)">Take test</a>
                             </p>
                         </div>
                     </div>
@@ -129,183 +83,6 @@
 
             </div>
               <!----assignments-->
-
-            <!----modules/ANGULAR-->
-            <div class="card card-user">
-
-              <div class="card-header">
-                <h5 class="card-title">Modules</h5>
-              </div>
-
-              <div class="card-body">
-
-                <div class="blog-card">
-                  <div class="description">
-                    <h4>Environment Setup</h4>
-                    <p class="read-more">
-                      <a href="https://www.tutorialspoint.com/angularjs/angularjs_environment.htm">Read More</a>
-                    </p>
-                  </div>
-                </div>
-
-                <div class="blog-card alt">
-                  <div class="description">
-                    <h4>HTML DOM</h4>
-                    <p class="read-more">
-                      <a href="https://www.tutorialspoint.com/angularjs/angularjs_html_dom.htm">Read More</a>
-                    </p>
-                  </div>
-                </div>
-
-                <div class="blog-card alt">
-                  <div class="description">
-                    <h4>Dependency Injection</h4>
-                    <p class="read-more">
-                      <a href="https://www.tutorialspoint.com/angularjs/angularjs_dependency_injection.htm">Read More</a>
-                    </p>
-                  </div>
-                </div>
-
-                <div class="blog-card alt">
-                  <div class="description">
-                    <h4>AJAX</h4>
-                    <p class="read-more">
-                      <a href="https://www.tutorialspoint.com/angularjs/angularjs_ajax.htm">Read More</a>
-                    </p>
-                  </div>
-                </div>
-
-                <div class="blog-card alt">
-                  <div class="description">
-                    <h4>Bootstrap Application</h4>
-                    <p class="read-more">
-                      <a href="https://www.tutorialspoint.com/angularjs/angularjs_bootstrap_application.htm">Read More</a>
-                    </p>
-                  </div>
-                </div>
-
-              </div>
-
-            </div>
-            <!----modules-->
-
-            <!----modules/JAVA-->
-            <div class="card card-user">
-
-              <div class="card-header">
-                <h4 class="card-title">Modules</h4>
-              </div>
-
-              <div class="card-body">
-
-                <div class="blog-card">
-                  <div class="description">
-                    <h4>Basic Syntax</h4>
-                    <p class="read-more">
-                      <a href="https://www.tutorialspoint.com/java/java_basic_syntax.htm">Read More</a>
-                    </p>
-                  </div>
-                </div>
-
-                <div class="blog-card alt">
-                  <div class="description">
-                    <h4>Regular Expressions</h4>
-                    <p class="read-more">
-                      <a href="https://www.tutorialspoint.com/java/java_regular_expressions.htm">Read More</a>
-                    </p>
-                  </div>
-                </div>
-
-                <div class="blog-card alt">
-                  <div class="description">
-                    <h4>Inheritance</h4>
-                    <p class="read-more">
-                      <a href="https://www.tutorialspoint.com/java/java_inheritance.htm">Read More</a>
-                    </p>
-                  </div>
-                </div>
-
-                <div class="blog-card alt">
-                  <div class="description">
-                    <h4>Interfaces</h4>
-                    <p class="read-more">
-                      <a href="https://www.tutorialspoint.com/java/java_interfaces.htm">Read More</a>
-                    </p>
-                  </div>
-                </div>
-
-                <div class="blog-card alt">
-                  <div class="description">
-                    <h4>Serializations</h4>
-                    <p class="read-more">
-                      <a href="https://www.tutorialspoint.com/java/java_serialization.htm">Read More</a>
-                    </p>
-                  </div>
-                </div>
-
-              </div>
-
-            </div>
-            <!----modules-->
-
-            <!----modules/Data Structures-->
-            <div class="card card-user">
-
-              <div class="card-header">
-                <h4 class="card-title">Modules</h4>
-              </div>
-
-              <div class="card-body">
-
-                <div class="blog-card">
-                  <div class="description">
-                    <h4>Algorithms Basic</h4>
-                    <p class="read-more">
-                      <a href="https://www.tutorialspoint.com/data_structures_algorithms/algorithms_basics.htm">Read More</a>
-                    </p>
-                  </div>
-                </div>
-
-                <div class="blog-card alt">
-                  <div class="description">
-                    <h4>Array Data Structure</h4>
-                    <p class="read-more">
-                      <a href="https://www.tutorialspoint.com/data_structures_algorithms/array_data_structure.htm">Read More</a>
-                    </p>
-                  </div>
-                </div>
-
-                <div class="blog-card alt">
-                  <div class="description">
-                    <h4>Doubly Linked List</h4>
-                    <p class="read-more">
-                      <a href="https://www.tutorialspoint.com/data_structures_algorithms/doubly_linked_list_algorithm.htm">Read More</a>
-                    </p>
-                  </div>
-                </div>
-
-                <div class="blog-card alt">
-                  <div class="description">
-                    <h4>Sorting Algorithms</h4>
-                    <p class="read-more">
-                      <a href="https://www.tutorialspoint.com/data_structures_algorithms/sorting_algorithms.htm">Read More</a>
-                    </p>
-                  </div>
-                </div>
-
-                <div class="blog-card alt">
-                  <div class="description">
-                    <h4>AVL Tree</h4>
-                    <p class="read-more">
-                      <a href="https://www.tutorialspoint.com/data_structures_algorithms/avl_tree_algorithm.htm">Read More</a>
-                    </p>
-                  </div>
-                </div>
-
-              </div>
-
-            </div>
-            <!----modules-->
 
 
 

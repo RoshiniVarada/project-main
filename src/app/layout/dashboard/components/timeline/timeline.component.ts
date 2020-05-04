@@ -27,7 +27,6 @@ export class TimelineComponent implements OnInit {
     this.firebaseService.getLearnings()
     .subscribe(acts => {
       this.activities=acts;
-      console.log("acts",this.activities)
     });
     this.createForm();
 

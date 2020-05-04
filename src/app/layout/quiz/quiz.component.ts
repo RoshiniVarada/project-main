@@ -51,12 +51,11 @@ export class QuizComponent implements OnInit {
   constructor(private quizService: QuizService) { }
 
   ngOnInit() {
-    this.quizes = this.quizService.getAll();
-    this.quizName = this.quizes[0].id;
-    this.loadQuiz(this.quizName);
+      var main=JSON.parse(localStorage.getItem("assgn"));
+    this.loadQuiz(main);
   }
 
-  loadQuiz(quizName: string) {
+  loadQuiz(quizName: any) {
     this.quizService.get(quizName).subscribe(res => {
       this.quiz = new Quiz(res);
       this.pager.count = this.quiz.questions.length;

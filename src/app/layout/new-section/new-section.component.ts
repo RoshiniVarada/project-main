@@ -1,8 +1,9 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FirebaseService } from '../../shared/services/firebase.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { IfStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-section-user',
@@ -11,56 +12,71 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class NewSectionComponent implements OnInit {
 
-  exampleForm: FormGroup;
-  avatarLink: string = "https://s3.amazonaws.com/uifaces/faces/twitter/adellecharles/128.jpg";
-
-  validation_messages = {
-    'no': [
-      { type: 'required', message: 'Number is required.' }
-    ],
-    'sub': [
-      { type: 'required', message: 'Subject is required.' }
-    ]
-
-  };
-
+  values: any;
+modules=true;
+assignments=false;
+showcomp=false;
+  valuesnew: any;
+  modulesSub: any;
+  user: any;
+  assgnSub: any;
   constructor(
-    private fb: FormBuilder,
-    private router: Router,
     public firebaseService: FirebaseService,
-    public authService: AuthService,
-    public ngZone: NgZone
+    public _Activatedroute:ActivatedRoute,
+    public router:Router
   ) { }
 
   ngOnInit() {
-    this.createForm();
+    this.values = localStorage.getItem("subdetails");
+      this.valuesnew =JSON.parse(this.values);
+      this.firebaseService.getModules(this.valuesnew.name)
+      .subscribe(result => {
+        this.modulesSub = result;
+        this.showcomp=true;
+      })
+   
+     
+
+      
   }
 
-  createForm() {
-    this.exampleForm = this.fb.group({
-      no: ['', Validators.required ],
-      sub: ['', Validators.required ]
+ taketest(assgn){
+  const assgnmwnt=JSON.stringify(assgn.payload.doc.data());
+  localStorage.setItem("assgn",assgnmwnt);
+  this.router.navigate(['layout/layout/student-dashboard']);
+    
+ }
+  public showfn(value){
+    if(value=="modules"){
+      this.modules=true;
+      this.assignments=false;
+     
+    }else if(value=="assignments"){
+      this.assignments=true;
+      this.modules=false;
+    }else{
+      this.modules=true;
+      this.modules=false;
+    }
+    if(this.modules==true){
+      this.firebaseService.getModules(this.valuesnew.name)
+      .subscribe(result => {
+        this.modulesSub = result;
+      })
+    }else{
+     this.user=JSON.parse(localStorage.getItem("UserDetails"));
+     this.valuesnew.sec=this.user.Section;
+      this.firebaseService.getAssignments(this.valuesnew)
+      .subscribe(result => {
+        this.assgnSub = result;
+      })
+    }
 
-    });
   }
 
 
 
-  resetFields(){
-    this.exampleForm = this.fb.group({
-      no: new FormControl('', Validators.required),
-      dif: new FormControl('', Validators.required),
-    });
-  }
 
-  onSubmit(value){
-    this.firebaseService.createSection(value)
-      .then(
-        res => {
-          this.resetFields();
-          this.router.navigate(['/display-section']);
-        }
-      )
-  }
+
 
 }

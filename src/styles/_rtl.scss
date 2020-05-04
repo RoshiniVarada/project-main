@@ -86,3 +86,19 @@
         }
     }
 }
+
+
+.form-check .form-check-sign .check:before {
+    position: absolute;
+    content: "";
+      transform: rotate(70deg);
+      display: inline-block;
+      margin-top: -3px;
+      margin-right: 5px;
+      width: 0;
+      color: #fff;
+      height: 0;
+      box-shadow: 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0 inset;
+      -webkit-animation: checkboxOff 0.3s forwards;
+      animation: checkboxOff 0.3s forwards;
+}

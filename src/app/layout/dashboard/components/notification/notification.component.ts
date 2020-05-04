@@ -18,7 +18,6 @@ export class NotificationComponent implements OnInit {
         this.firebaseService.getNotifications()
         .subscribe(result => {
           this.notifs = result;
-          console.log( this.notifs)
           this.userData = JSON.parse(localStorage.getItem('user'));
         })
       }
