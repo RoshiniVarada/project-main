@@ -8,15 +8,22 @@ import { Router } from '@angular/router';
 })
 export class StatComponent implements OnInit {
     @Input() subject: any;
+    @Input() pageName: any;
 
     @Output() event: EventEmitter<any> = new EventEmitter();
+    
 
     constructor(
         private router: Router
     ) {}
 
     ngOnInit() {}
-    viewdetails(subject){
-        this.router.navigate(['faculty-layout/layout/new-section']);
+    viewdetails(subject,pageName){
+        if(this.pageName=="facultylayout"){
+            this.router.navigate(['faculty-layout/layout/new-section']);
+        }else{
+            this.router.navigate(['layout/layout/new-section']);
+        }
+       
     }
 }
