@@ -12,55 +12,45 @@ export class DashboardComponent implements OnInit {
     public alerts: Array<any> = [];
     public sliders: Array<any> = [];
     subjects: any;
-
+    newAlert:String;
+    textAlert:String;
+    removeCreate='false';
     constructor( public firebaseService: FirebaseService) {
-        this.sliders.push(
-            {
-                imagePath: 'assets/images/slider1.jpg',
-                label: 'First slide label',
-                text:
-                    'Nulla vitae elit libero, a pharetra augue mollis interdum.'
-            },
-            {
-                imagePath: 'assets/images/slider2.jpg',
-                label: 'Second slide label',
-                text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-            },
-            {
-                imagePath: 'assets/images/slider3.jpg',
-                label: 'Third slide label',
-                text:
-                    'Praesent commodo cursus magna, vel scelerisque nisl consectetur.'
-            }
-        );
-
-        this.alerts.push(
-            {
-                id: 1,
-                type: 'success',
-                message: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Voluptates est animi quibusdam praesentium quam, et perspiciatis,
-                consectetur velit culpa molestias dignissimos
-                voluptatum veritatis quod aliquam! Rerum placeat necessitatibus, vitae dolorum`
-            },
-            {
-                id: 2,
-                type: 'warning',
-                message: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Voluptates est animi quibusdam praesentium quam, et perspiciatis,
-                consectetur velit culpa molestias dignissimos
-                voluptatum veritatis quod aliquam! Rerum placeat necessitatibus, vitae dolorum`
-            }
-        );
     }
 
     ngOnInit() {
         this.getData();
+        this.removeCreate=localStorage.getItem('removeCreate');
     }
   
     public closeAlert(alert: any) {
         const index: number = this.alerts.indexOf(alert);
         this.alerts.splice(index, 1);
+    }
+
+    public  createAlert(){
+        this.firebaseService.createAlert(this.newAlert);
+        this.removeCreate="false";
+        localStorage.setItem('removeCreate','false');
+    }
+    public removeAlert(){
+        this.removeCreate='false';
+        localStorage.setItem('removeCreate','false');
+    }
+
+    public  editAlert(alert){
+        this.textAlert=alert.payload.doc.data().description
+        alert.edit="true";
+
+    }
+    public  saveAlert(alert){
+        alert.description=this.textAlert;
+        this.firebaseService.editAlert(alert);
+        alert.edit="false";
+    }
+
+    public  deleteAlert(alert){
+        this.firebaseService.deleteAlert(alert);
     }
 
     getData(){
@@ -81,8 +71,7 @@ export class DashboardComponent implements OnInit {
         .subscribe(result => {
           this.alerts = result;
           for(var i=0;i<this.alerts.length;i++){
-            this.alerts[i].description=this.alerts[i].payload.doc.data().description;
-            console.log( this.alerts[i].description)
+            this.alerts[i].edit="false";
           }
          
         })

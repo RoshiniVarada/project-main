@@ -8,6 +8,7 @@ import { FirebaseService } from 'src/app/shared/services/firebase.service';
 })
 export class NotificationComponent implements OnInit {
     notifs: any;
+  userData: any;
     constructor(    public firebaseService: FirebaseService) { }
     ngOnInit() { 
      this.getData();
@@ -18,6 +19,7 @@ export class NotificationComponent implements OnInit {
         .subscribe(result => {
           this.notifs = result;
           console.log( this.notifs)
+          this.userData = JSON.parse(localStorage.getItem('user'));
         })
       }
 }

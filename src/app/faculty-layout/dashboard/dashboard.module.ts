@@ -11,7 +11,9 @@ import { SocketService } from '../dashboard/components/chat/shared/services/sock
 import {
     TimelineComponent,
     NotificationComponent,
-    ChatComponent
+    ChatComponent,
+    TodolistComponent
+
 } from './components';
 import { StatModule } from '../../shared/modules';
 
@@ -29,7 +31,8 @@ import { StatModule } from '../../shared/modules';
         DashboardComponent,
         TimelineComponent,
         NotificationComponent,
-        ChatComponent
+        ChatComponent,
+        TodolistComponent
     ],
     providers: [SocketService]
 })

@@ -7,6 +7,7 @@ import { SocketService } from './shared/services/socket.service';
 import { AuthService } from '../../../../shared/services/auth.service';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
+import { FirebaseService } from 'src/app/shared/services/firebase.service';
 
 const AVATAR_URL = 'https://api.adorable.io/avatars/285';
 //const AVATAR_URL = (user.photoURL) ? user.photoURL : '/assets/dummy-user.png';
@@ -24,20 +25,44 @@ export class ChatComponent implements OnInit {
   ioConnection: any;
   userData:any;
   timeformat:any;
+  messagehistory: Message[] = [];
+  setMsgHistory="false";
 
 
-  constructor(private socketService: SocketService,public authService: AuthService) {
+  constructor(private socketService: SocketService,public authService: AuthService,public firebaseService:FirebaseService) {
     }
 
   ngOnInit(): void {
 
     this.userData = JSON.parse(localStorage.getItem('user'));
-  
-
+    localStorage.removeItem("setMsgHistory");
     this.initModel();
     setTimeout(() => {
      this.openUserPopup();
     }, 0);
+
+
+     
+    this.firebaseService.getMessages()
+    .subscribe(messagehistory => {
+      this.setMsgHistory=localStorage.getItem("setMsgHistory");
+      if(this.setMsgHistory!=="true"){
+        if(messagehistory.length<=100){
+          messagehistory.forEach((x) => {this.messagehistory.push(x.payload.doc.data()) });
+          localStorage.setItem("setMsgHistory","true");
+          this.messages=this.messagehistory;
+        }else{
+          
+          messagehistory.forEach((x) => { this.firebaseService.deleteMessages(x.payload.doc.id)});
+          localStorage.setItem("setMsgHistory","false");
+          
+        }
+      
+      }
+  
+ 
+
+    });
   }
 
 
@@ -58,7 +83,12 @@ export class ChatComponent implements OnInit {
     this.ioConnection = this.socketService.onMessage()
       .subscribe((message: Message) => {
         this.messages.push(message);
+     
+        this.messagesfn(message);
+
       });
+
+
 
 
     this.socketService.onEvent(Event.CONNECT)
@@ -82,7 +112,9 @@ export class ChatComponent implements OnInit {
       this.initIoConnection();
 
   }
-
+  public messagesfn(message){
+    this.firebaseService.createMessage(message);
+  };
 
   public sendMessage(message: string): void {
     if (!message) {
@@ -94,7 +126,6 @@ export class ChatComponent implements OnInit {
      
       this.messages[i].timeFormat=timeAgo.format(new Date(this.messages[i].time));
       
-      console.log(this.messages[i].timeFormat);
     }
 
     this.socketService.send({

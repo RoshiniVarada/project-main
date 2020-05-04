@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from 'src/app/shared/services/firebase.service';
 
 @Component({
-    selector: 'app-notification',
-    templateUrl: './notification.component.html',
-    styleUrls: ['./notification.component.scss']
+    selector: 'app-todolist',
+    templateUrl: './todolist.component.html',
+    styleUrls: ['./todolist.component.scss']
 })
-export class NotificationComponent implements OnInit {
+export class TodolistComponent implements OnInit {
     notifs: any;
   userData: any;
     constructor(    public firebaseService: FirebaseService) { }

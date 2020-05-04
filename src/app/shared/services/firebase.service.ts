@@ -51,8 +51,31 @@ export class FirebaseService {
     return this.db.collection('section').doc(Key).delete();
   }
 
+  getLearnings(){
+    return this.db.collection('learnings').snapshotChanges();
+  }
+
+
+
+
+
+
+
+ deleteMessages(key) {
+  return this.db.collection('messages').doc(key).delete();
+
+ 
+
+}
+
+
+
+
   getUsers(){
     return this.db.collection('group').snapshotChanges();
+  }
+  getMessages(){
+    return this.db.collection('messages').snapshotChanges();
   }
   getSections(){
     return this.db.collection('section').snapshotChanges();
@@ -91,6 +114,15 @@ export class FirebaseService {
     });
   }
 
+  createMessage(value){
+    return this.db.collection('messages').add({
+      from:value.from,
+      content: value.content,
+      time: value.time,
+      timeFormat:value.timeFormat
+    });
+  }
+
 
     createSection(value){
       return this.db.collection('section').add({
@@ -100,7 +132,21 @@ export class FirebaseService {
 
     
   }
+  createLearnings(value){
+    return this.db.collection('learnings').add({
+      URL: value.URL,
+      Title: value.Title
+    })
+  
+}
+createNotifications(value){
 
+  return this.db.collection('notifications').add({
+    description: value.description
+  })
+
+
+}
  
 
   updateSection(userKey,value){
