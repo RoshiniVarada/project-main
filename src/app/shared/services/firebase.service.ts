@@ -160,6 +160,20 @@ createAssignments(value){
   })
 
 }
+
+createLists(value){
+  return this.db.collection('Lists').add({
+    No: value.No,
+    Subject: value.Subject,
+    description:value.description
+  })
+
+}
+getList(){
+  return this.db.collection('Lists').snapshotChanges();
+  
+}
+
 createNotifications(value){
 
   return this.db.collection('notifications').add({

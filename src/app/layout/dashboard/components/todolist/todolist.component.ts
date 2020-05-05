@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from 'src/app/shared/services/firebase.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-todolist',
@@ -9,17 +10,26 @@ import { FirebaseService } from 'src/app/shared/services/firebase.service';
 export class TodolistComponent implements OnInit {
     notifs: any;
   userData: any;
-    constructor(    public firebaseService: FirebaseService) { }
+  lists: any;
+  showlist: boolean;
+    constructor(    public firebaseService: FirebaseService,public router:Router) { }
     ngOnInit() { 
      this.getData();
     }
     
     getData(){
-        this.firebaseService.getNotifications()
+        this.firebaseService.getList()
         .subscribe(result => {
-          this.notifs = result;
-          console.log( this.notifs)
-          this.userData = JSON.parse(localStorage.getItem('user'));
+          this.lists = result;
+          if(this.lists.length>0){
+            this.showlist=true;
+          }else{
+            this.showlist=false;
+          }
+          console.log("lisydt", this.lists)
         })
+      }
+      taketest(){
+        this.router.navigate(['/layout/layout/student-dashboard']);
       }
 }

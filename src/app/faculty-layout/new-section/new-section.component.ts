@@ -117,6 +117,8 @@ showcomp=false;
 onSubmit(value){
 
  this.firebaseService.createAssignments(value);
+ value.description="Assignment";
+ this.firebaseService.createLists(value);
 }
 
 

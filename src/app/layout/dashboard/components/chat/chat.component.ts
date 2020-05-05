@@ -41,28 +41,6 @@ export class ChatComponent implements OnInit {
      this.openUserPopup();
     }, 0);
 
-
-     
-    this.firebaseService.getMessages()
-    .subscribe(messagehistory => {
-      this.setMsgHistory=localStorage.getItem("setMsgHistory");
-      if(this.setMsgHistory!=="true"){
-        if(messagehistory.length<=100){
-          messagehistory.forEach((x) => {this.messagehistory.push(x.payload.doc.data()) });
-          localStorage.setItem("setMsgHistory","true");
-          this.messages=this.messagehistory;
-        }else{
-          
-          messagehistory.forEach((x) => { this.firebaseService.deleteMessages(x.payload.doc.id)});
-          localStorage.setItem("setMsgHistory","false");
-          
-        }
-      
-      }
-  
- 
-
-    });
   }
 
 
@@ -84,7 +62,7 @@ export class ChatComponent implements OnInit {
       .subscribe((message: Message) => {
         this.messages.push(message);
      
-        this.messagesfn(message);
+  
 
       });
 
