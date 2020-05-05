@@ -740,9 +740,11 @@
       width: 40px;
       border-radius: 19px;
      }
-    ul.activity-list > li > p {
+     ul.activity-list > li > p {
       margin-bottom: 0;
-      padding-left: 3.5em; }
+      padding-left: 3.5em;
+      padding-top: 0.4rem;
+    }
     ul.activity-list > li .timestamp {
       display: block;
       font-size: 13px;

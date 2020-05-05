@@ -13,7 +13,7 @@
             <li *ngFor="let notif of notifs">
                
                 <i class="fa fa-plus activity-icon acts_text"  aria-hidden="true"></i>
-                <p><a style="font-weight: bold;">{{notif.payload.doc.data().title}}</a> {{notif.payload.doc.data().description}} <span class="timestamp">20 minutes ago</span></p>
+                <p><a style="font-weight: bold;">{{notif.payload.doc.data().title}}</a> {{notif.payload.doc.data().description}}</p>
             </li>
         </ul>
         <button type="button" class="btn  btn-bottom center-block">Load More</button>
