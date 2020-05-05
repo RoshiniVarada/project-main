@@ -77,6 +77,10 @@
 .icon_class_rtl{
     padding-left: 4.2vw;
   }
+  .text-right_rtl{
+    text-align: left !important;
+    margin-left: 1.2vw;
+  }
 }
 @media screen and (max-width: 992px) {
     .rtl {
@@ -120,6 +124,10 @@
     .icon_class_rtl{
         padding-left: 4.2vw;
       }
+      .text-right_rtl{
+        text-align: left !important;
+        margin-left: 1.2vw;
+    }
     }
 }
 
