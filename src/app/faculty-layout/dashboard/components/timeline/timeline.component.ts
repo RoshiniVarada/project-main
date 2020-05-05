@@ -27,7 +27,6 @@ export class TimelineComponent implements OnInit {
     this.firebaseService.getLearnings()
     .subscribe(acts => {
       this.activities=acts;
-      console.log("acts",this.activities)
     });
     this.createForm();
 
@@ -57,7 +56,8 @@ export class TimelineComponent implements OnInit {
         this.router.navigate(['/faculty-layout']);
       }
     )
-    value.description= value.Title+" " +"new learning module is created";
+    value.description= "new learning module is created";
+    value.title=value.Title;
     this.firebaseService.createNotifications(value);
   }
  

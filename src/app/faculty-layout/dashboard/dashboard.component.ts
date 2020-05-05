@@ -30,6 +30,8 @@ export class DashboardComponent implements OnInit {
 
     public  createAlert(){
         this.firebaseService.createAlert(this.newAlert);
+        var alert1={description:"new announcement has been made",title:this.newAlert};
+        this.firebaseService.createNotifications(alert1);
         this.removeCreate="false";
         localStorage.setItem('removeCreate','false');
     }

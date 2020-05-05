@@ -147,9 +147,19 @@ export class FirebaseService {
     })
   
 }
+createAssignments(value){
+  return this.db.collection('Assignments').add({
+    No: value.No,
+    Max_marks: value.Max_marks,
+    Subject:value.Subject,
+    id:value.Subject+"_"+value.No
+  })
+
+}
 createNotifications(value){
 
   return this.db.collection('notifications').add({
+    title:value.title,
     description: value.description
   })
 

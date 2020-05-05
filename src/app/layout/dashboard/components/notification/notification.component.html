@@ -12,7 +12,8 @@
         <ul class="list-unstyled activity-list">
             <li *ngFor="let notif of notifs">
                
-                <p>{{notif.payload.doc.data().description}} <span class="timestamp">20 minutes ago</span></p>
+                <img src="{{(userData.photoURL) ? userData.photoURL : '/assets/dummy-user.png'}}" alt="Avatar" class="img-circle pull-left avatar">
+                <p><a style="font-weight: bold;">{{notif.payload.doc.data().title}}</a> {{notif.payload.doc.data().description}} <span class="timestamp">20 minutes ago</span></p>
             </li>
         </ul>
         <button type="button" class="btn  btn-bottom center-block">Load More</button>

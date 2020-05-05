@@ -56,7 +56,8 @@ export class TimelineComponent implements OnInit {
         this.router.navigate(['/faculty-layout']);
       }
     )
-    value.description= value.Title+" " +"new learning module is created";
+    value.description= "new learning module is created";
+    value.title=value.Title;
     this.firebaseService.createNotifications(value);
   }
  

@@ -20,13 +20,29 @@ showcomp=false;
   modulesSub: any;
   user: any;
   assgnSub: any;
+  grades: boolean;
+  learnings: boolean;
+  exampleForm: FormGroup;
+  validation_messages = {
+    'No': [
+      { type: 'required', message: 'No is required.' }
+    ],
+    'Subject': [
+     { type: 'required', message: 'Subject is required.' }
+   ],
+   'Max_marks': [
+    { type: 'required', message: 'Max_marks is required.' }
+  ]
+  };
   constructor(
     public firebaseService: FirebaseService,
     public _Activatedroute:ActivatedRoute,
-    public router:Router
+    public router:Router,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit() {
+    this.createForm();
     this.values = localStorage.getItem("subdetails");
       this.valuesnew =JSON.parse(this.values);
       this.firebaseService.getModules(this.valuesnew.name)
@@ -39,6 +55,13 @@ showcomp=false;
 
       
   }
+  createForm() {
+    this.exampleForm = this.fb.group({
+      No: ['', Validators.required ],
+      Subject: ['', Validators.required ],
+      Max_marks:['',Validators.required]
+    });
+  }
 
  taketest(assgn){
   const assgnmwnt=JSON.stringify(assgn.payload.doc.data());
@@ -46,34 +69,57 @@ showcomp=false;
   this.router.navigate(['layout/layout/student-dashboard']);
     
  }
-  public showfn(value){
-    if(value=="modules"){
-      this.modules=true;
-      this.assignments=false;
-     
-    }else if(value=="assignments"){
-      this.assignments=true;
-      this.modules=false;
-    }else{
-      this.modules=true;
-      this.modules=false;
-    }
-    if(this.modules==true){
-      this.firebaseService.getModules(this.valuesnew.name)
-      .subscribe(result => {
-        this.modulesSub = result;
-      })
-    }else{
-     this.user=JSON.parse(localStorage.getItem("UserDetails"));
-     this.valuesnew.sec=this.user.Section;
-      this.firebaseService.getAssignments(this.valuesnew)
-      .subscribe(result => {
-        this.assgnSub = result;
-      })
-    }
-
+ public showfn(value){
+  if(value=="modules"){
+    this.modules=true;
+    this.assignments=false;
+    this.grades=false;
+    this.learnings=false;
+  }else if(value=="assignments"){
+    this.assignments=true;
+    this.modules=false;
+    this.grades=false;
+    this.learnings=false;
+  }else if(value=="learnings"){
+    this.assignments=false;
+    this.modules=false;
+    this.grades=false;
+    this.learnings=true;
+  }else if(value=="grades"){
+    this.assignments=true;
+    this.modules=false;
+    this.grades=true;
+    this.learnings=false;
+  }else{
+    this.modules=true;
+    this.modules=false;
+    this.grades=false;
+    this.learnings=false;
   }
+  if(this.modules==true){
+    this.firebaseService.getModules(this.valuesnew.name)
+    .subscribe(result => {
+      this.modulesSub = result;
+    })
+  }else if(this.learnings==true){
+    this.router.navigate(['/faculty-layout']);
+   }else if(this.grades==true){
+    this.router.navigate(['/faculty-layout/layout/charts']);
+   }else if(this.assignments==true){
+    this.user=JSON.parse(localStorage.getItem("UserDetails"));
+    this.valuesnew.sec=this.user.Section;
+     this.firebaseService.getAssignments(this.valuesnew)
+     .subscribe(result => {
+       this.assgnSub = result;
+     })
+   }
 
+}
+
+onSubmit(value){
+
+ this.firebaseService.createAssignments(value);
+}
 
 
 

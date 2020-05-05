@@ -15,6 +15,10 @@ export class DashboardComponent implements OnInit {
     newAlert:String;
     textAlert:String;
     removeCreate='false';
+    value: {
+        description:any,
+        title:any
+    };
     constructor( public firebaseService: FirebaseService) {
     }
 
@@ -30,6 +34,9 @@ export class DashboardComponent implements OnInit {
 
     public  createAlert(){
         this.firebaseService.createAlert(this.newAlert);
+        this.value.description= "new announcement is made";
+        this.value.title=this.newAlert;
+        this.firebaseService.createNotifications(this.value);
         this.removeCreate="false";
         localStorage.setItem('removeCreate','false');
     }
