@@ -54,7 +54,7 @@ export class QuizComponent implements OnInit {
     
       var main=JSON.parse(localStorage.getItem("assgn"));
     this.loadQuiz(main);
-    localStorage.removetem("assgn");
+    localStorage.removeItem("assgn");
   }
 
   loadQuiz(quizName: any) {
