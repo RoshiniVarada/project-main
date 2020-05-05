@@ -102,6 +102,10 @@ export class FirebaseService {
     return this.db.collection('Assignments', ref => ref.where('Subject', '==', value.name)).snapshotChanges();
     
   }
+  getAllAssignments(){
+    return this.db.collection('Assignments').snapshotChanges();
+    
+  }
 
   createUser(value, avatar){
     this.profileuser=JSON.parse(localStorage.getItem("user"));

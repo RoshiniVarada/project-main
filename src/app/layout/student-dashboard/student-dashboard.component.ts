@@ -7,9 +7,11 @@ import { QuizComponent } from'../quiz/quiz.component';
 @Component({
   selector: 'app-student-dashboard',
   templateUrl: './student-dashboard.component.html',
-  styleUrls: ['./student-dashboard.component.css']
+  styleUrls: ['./student-dashboard.component.scss']
 })
 export class StudentDashboardComponent implements OnInit {
+  assignments=false;
+  assgnSub: any;
 
   constructor(    public firebaseService: FirebaseService,
     private router: Router,
@@ -17,10 +19,24 @@ export class StudentDashboardComponent implements OnInit {
     public ngZone: NgZone) { }
 
   ngOnInit(): void {
+
+   const assign= localStorage.getItem("assgn");
+   if(assign==null || assign==undefined){
+    this.assignments=true;
+   }
+     if(this.assignments==true){
+      this.firebaseService.getAllAssignments()
+      .subscribe(result => {
+        this.assgnSub = result;
+      })
+    }
   }
-  goToUserProfile(){
-    this.router.navigate(['/list-details']);
-  }
+  taketest(assgn){
+    const assgnmwnt=JSON.stringify(assgn.payload.doc.data());
+    localStorage.setItem("assgn",assgnmwnt);
+    this.assignments=false;
+      
+   }
   goToNewUser(){
     this.router.navigate(['/new-user']);
   }
