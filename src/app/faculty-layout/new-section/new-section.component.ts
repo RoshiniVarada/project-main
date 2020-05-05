@@ -115,10 +115,18 @@ showcomp=false;
 }
 
 onSubmit(value){
-
+var x:any;
  this.firebaseService.createAssignments(value);
  value.description="Assignment";
  this.firebaseService.createLists(value);
+ 
+ /*this.firebaseService.getUsers().subscribe(result => {
+  for(x in result){
+    x.payload.doc.data().assignments.push(value.id);
+    this.firebaseService.updateUser(x.payload.doc.id,x);
+  }
+
+})*/
 }
 
 
