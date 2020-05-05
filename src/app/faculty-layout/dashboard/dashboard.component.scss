@@ -2397,7 +2397,7 @@
       padding: 3px; }
     .alert .close ~ span {
       display: block;
-      max-width: 89%; }
+    }
     .alert.alert-with-icon {
       padding-left: 65px; }
   
@@ -2408,17 +2408,6 @@
   .img-raised {
     box-shadow: 0px 10px 25px 0px rgba(0, 0, 0, 0.3); }
   
-  /*--------------------------------
-  
-  nucleo-icons Web Font - built using nucleoapp.com
-  License - nucleoapp.com/license/
-  
-  -------------------------------- */
- 
-  
-  /*------------------------
-      base class definition
-  -------------------------*/
   .nc-icon {
     display: inline-block;
     font: normal normal normal 14px/1 'nucleo-icons';

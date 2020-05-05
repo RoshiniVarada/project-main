@@ -83,13 +83,11 @@ showcomp=false;
      }else if(this.grades==true){
       this.router.navigate(['/layout/layout/charts']);
      }else if(this.assignments==true){
-      this.user=JSON.parse(localStorage.getItem("UserDetails"));
-      this.valuesnew.sec=this.user.Section;
-       this.firebaseService.getAssignments(this.valuesnew)
-       .subscribe(result => {
-         this.assgnSub = result;
-       })
-     }
+      this.firebaseService.getAssignments(this.valuesnew)
+      .subscribe(result => {
+        this.assgnSub = result;
+      })
+    }
 
   }
 
