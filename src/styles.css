@@ -662,6 +662,14 @@ body .table thead th {
   .px-logo {
     display: none;
   }
+  .redirectToLogin {
+    color: black;
+  }
+  
+  .redirectToLogin .redirect {
+    color:black;
+    text-decoration: underline;
+  }
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
